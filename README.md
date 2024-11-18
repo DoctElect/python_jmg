@@ -1,2 +1,2 @@
 # python_jmg
-Cours de python avec Jean Marie GUYADER
+Cours de python avec Jean-Marie Guyader
