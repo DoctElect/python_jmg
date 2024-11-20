@@ -5,7 +5,7 @@ import geopandas as gpd
 gdf = gpd.read_file("/home/mattheo/Documents/ISEN/CIPA5/Python/TP1PLUS/rpg-bio-2022-national.gpkg")
 
 # Créer la carte
-m = folium.Map(location=[48.8, 2.3], zoom_start=10)k
+m = folium.Map(location=[48.8, 2.3], zoom_start=10)
 
 # Ajouter les données avec style personnalisé
 folium.GeoJson(
