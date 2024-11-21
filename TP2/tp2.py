@@ -39,8 +39,7 @@ def getDateElements(dateString):
     dict['heure'] = dateString.split(':')[1][12:14]
     dict['minute'] = dateString.split(':')[2]
     return dict
-#Test fonction getDateElements
-#print(getDateElements('2024-11-18T14:09:00+08:00'))
+
 def getParkInformation(apiString):
     dictio = {}
     data = apiString[32:-3].replace('"',"").split("}, {")
