@@ -1,10 +1,16 @@
 def readFile(pathFile):
+    #Fonction pour ouverture et lecture d'un fichier
+    #:param pathFile:chemin relatif ou absolu d'un fichier
+    #:return: retourne un tableau contenant un élément par ligne du fichier, chaque élément étant une chaine de caractère
     fichier = open(pathFile,'r',encoding="utf-8")
     lignes = fichier.readlines()
     fichier.close()
     return lignes
 
 def totalSurface(lignes):
+    #Fonction parcourant chaque ligne d'un fichier texte pour en extraire la surface et la sommer à l'ensemble des résultats précédents
+    #:param lignes: Tableau des lignes du fichier d'entrée
+    #:return: Somme calculée 
     total = 0
     for ligne in lignes[1:]:
         champ = ligne.strip().split(',')
@@ -15,6 +21,9 @@ def totalSurface(lignes):
     return total
 
 def buildDictionary(lignes):
+    #Fonction parcourant un fichier texte d'entrée pour en ressortir un dictionnaire avec les données rangées
+    #:param lignes: Tableau des lignes du fichier d'entrée
+    #:return: retour du dictionnaire rangé
     dictionnaire = {}
     for ligne in lignes:
         try:
@@ -36,6 +45,9 @@ def buildDictionary(lignes):
     return dictionnaire
 
 def sommeSurfacesParCommunes(dictionary):
+    #Fonction parcourant chaque élément d'un dictionnaire pour en récupérer la somme des surfaces des parcelles par commune
+    #:param dictionary: Dictionnaire contenant les données des toutes les parcelles
+    #:return: Dictionnaire avec la somme calculée pour chaque commune ajouter dans son arborescence 
     for code_region, communes in dictionary.items():
         for code_commune, details in communes.items():
             details['surfaceTotalesParcelles'] = 0
@@ -44,6 +56,10 @@ def sommeSurfacesParCommunes(dictionary):
     return dictionary
 
 def getCommunePlusDeBioDepartement(dictionary, departementNumber):
+    #Fonction parcourant un dictionnaire pour récupérer la commune faisant le plus de BIO en fonction du département demandé
+    #:param dictionary: Dictionnaire contenant les données des toutes les parcelles
+    #:param departementNumber: Numéro du département recherché
+    #:return: Retourne un t-uples avec le nom de la commune et sa surface totale
     communePlusBio = ('',0)
     for code_region, communes in dictionary.items():
         if(code_region==departementNumber):
@@ -54,6 +70,10 @@ def getCommunePlusDeBioDepartement(dictionary, departementNumber):
     return communePlusBio
 
 def getCommunePlusDeBio(dictionary):
+    #Fonction parcourant un dictionnaire pour récupérer la commune faisant le plus de BIO en fonction du département demandé
+    #:param dictionary: Dictionnaire contenant les données des toutes les parcelles
+    #:param departementNumber: Numéro du département recherché
+    #:return: Retourne un t-uples avec le nom de la commune et sa surface totale
     communePlusBio = ('',0)
     for code_region, communes in dictionary.items():
         for code_commune, details in communes.items():
@@ -62,6 +82,9 @@ def getCommunePlusDeBio(dictionary):
     return communePlusBio
 
 def classementCommunesBio(dictionary):
+    #Focntion permettant de classer les communes faisant le plus de bio dans un dictionnaire
+    #:param dictionary: Dictionnaire contenant les données des toutes les parcelles
+    #:return: retourne une liste de commune triée par ordre de surface de parcelle
     list = []
     for code_region, communes in dictionary.items():
         for code_commune, details in communes.items():
@@ -69,6 +92,9 @@ def classementCommunesBio(dictionary):
     return sorted(list, key=lambda x: x[1],reverse=True)
 
 def writeListToText(myList, filePath):
+    #Fonction générant un fichier contenant le classement contenu dans une liste
+    #:param myList: Liste triée des commune
+    #:param filePath: Chemin du fichier à écrire
     file = open(filePath,'a')
     for element in myList:
         file.write(str(element[0])+','+str(element[1])+','+str(element[2])+'\n')

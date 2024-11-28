@@ -13,6 +13,10 @@ data = requests.get(url)
 
 
 def getColor(fillrate):
+    """Fonction permettant de renvoyer une couleur entre le vert et le rouge en fontion d'un fillrate
+    Returns:
+        hexadécimal: chaine de la couleur en hexadécimal
+    """
     # Calcul des composantes rouge et vert
     red = int(255 * (1 - fillrate))  # Diminue à mesure que le fillrate augmente
     green = int(255 * (fillrate))   # Augmente à mesure que le fillrate augmente
@@ -21,6 +25,12 @@ def getColor(fillrate):
     return f'#{red:02x}{green:02x}00'
 
 def get_color(fillrate):
+    """Fonction permettant de renvoyer une couleur entre le vert et le rouge en fontion d'un fillrate
+    Args:
+        fillrate (pourcentage): pourcentage du fillrate
+    Returns:
+        string: chaine couleur
+    """
     if not (0 <= fillrate <= 100):
         raise ValueError("fillrate must be between 0 and 100")
 
@@ -32,6 +42,13 @@ def get_color(fillrate):
         return "red"
 
 def getDateElements(dateString):
+    """Focntion pour récupérer les information sur une date
+    Args:
+        dateString (string): chaine ISO d'une date
+
+    Returns:
+        dictionary: éléments d'une date dans un dictionnaire
+    """
     dict = {}
     dict['annee'] = dateString.split(':')[1][:5]
     dict['mois'] = dateString.split(':')[1][6:8]
@@ -41,6 +58,14 @@ def getDateElements(dateString):
     return dict
 
 def getParkInformation(apiString):
+    """Fonction pour récupérer les informations sur chaque parking
+
+    Args:
+        apiString (string): chaine contenant le retour de l'API sur les données
+
+    Returns:
+        dictionary: données rangées
+    """
     dictio = {}
     data = apiString[32:-3].replace('"',"").split("}, {")
     for elem in data:

@@ -12,6 +12,12 @@ url = 'https://data.rennesmetropole.fr/api/explore/v2.1/catalog/datasets/tco-par
 data = requests.get(url).json()
 
 def get_color(fillrate):
+    """Fonction permettant de renvoyer une couleur entre le vert et le rouge en fontion d'un fillrate
+    Args:
+        fillrate (pourcentage): pourcentage du fillrate
+    Returns:
+        string: chaine couleur
+    """
     if not (0 <= fillrate <= 100):
         raise ValueError("fillrate must be between 0 and 100")
 
@@ -23,10 +29,25 @@ def get_color(fillrate):
         return "red"
 
 def getDateElementsWithDatetime(dateString):  
+    """Focntion pour récupérer les information sur une date
+    Args:
+        dateString (string): chaine ISO d'une date
+
+    Returns:
+        Object: éléments d'une date dans un date_object
+    """
     date_object = datetime.fromisoformat(dateString)
     return date_object
 
 def getParkInformationWithJSON(apiJSON):
+    """Fonction pour récupérer les informations de chaque parking 
+
+    Args:
+        apiJSON (JSON): string JSON issue du GET de l'API
+
+    Returns:
+        dictionary: dictionnaire contenant les informations sur chaque parking
+    """
     dictio = {}
     for parking in apiJSON['results']:
         dictio2 = {}   
